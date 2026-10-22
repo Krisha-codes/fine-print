@@ -1,20 +1,56 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Card from "../components/Card.astro";
+import { categories } from "../utils/categories";
 
 export function getStaticPaths() {
-  return [
-    { params: { category: "news" }, props: { label: "News" } },
-    { params: { category: "receipts" }, props: { label: "Receipts" } },
-    { params: { category: "success-stories" }, props: { label: "Success Stories" } },
-  ];
+  return categories.map((c) => ({
+    params: { category: c.slug },
+    props: { label: c.label },
+  }));
 }
 
 const { label } = Astro.props;
+
+const posts = (
+  await getCollection("posts", ({ data }) => !data.draft && data.category === label)
+).sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
 ---
 
 <BaseLayout title={label}>
   <div class="container page">
     <h1>{label}</h1>
-    <p>Posts for this category go here in step 6.</p>
+    {
+      posts.length === 0 ? (
+        <p>Nothing here yet.</p>
+      ) : (
+        <ul class="grid">
+          {posts.map((post) => (
+            <li>
+              <Card post={post} />
+            </li>
+          ))}
+        </ul>
+      )
+    }
   </div>
 </BaseLayout>
+
+<style>
+  h1 {
+    font-size: 56px;
+    margin-bottom: var(--space-4);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .grid li {
+    display: flex;
+  }
+</style>
