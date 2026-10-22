@@ -1,0 +1,27 @@
+:root {
+  /* Colors */
+  --black: #111111;
+  --cream: #F3EEE0;
+  --red: #FF3E41;
+  --gray: #5F5E5A;
+
+  /* Fonts */
+  --font-display: "Anton", "Archivo Black", Impact, sans-serif;
+  --font-ui: "Inter", system-ui, sans-serif;
+  --font-body: "PT Serif", Georgia, serif;
+  --font-hand: "Caveat", cursive;
+  --font-mono: "Courier Prime", "Courier New", monospace;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+  --space-6: 64px;
+
+  /* Layout */
+  --page-max: 1200px;
+  --column: 700px;
+  --border: 2px solid var(--black);
+}
