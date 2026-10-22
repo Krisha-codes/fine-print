@@ -6,7 +6,7 @@ excerpt: "A one or two sentence teaser goes here for the post called Placeholder
 author: "Krisha"
 publishDate: 2026-10-18
 featured: false
-takeaway: "My short personal takeaway goes here."
+
 ---
 
 Placeholder body paragraph one. This is where the research and the writing will go once the real posts are ready.

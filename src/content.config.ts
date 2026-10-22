@@ -14,7 +14,7 @@ const posts = defineCollection({
       author: z.string().default("Krisha"),
       publishDate: z.coerce.date(),
       featured: z.boolean().default(false),
-      takeaway: z.string(),
+      takeaway: z.string().optional(),
     }),
 });
 

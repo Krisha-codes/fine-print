@@ -45,10 +45,14 @@ const categorySlug = categories.find((c) => c.label === category)?.slug ?? "";
       <Content />
     </div>
 
-    <aside class="post__takeaway">
-      <span class="post__takeaway-label">My takeaway</span>
-      <p>{takeaway}</p>
-    </aside>
+        {
+      takeaway && (
+        <aside class="post__takeaway">
+          <span class="post__takeaway-label">My takeaway</span>
+          <p>{takeaway}</p>
+        </aside>
+      )
+    }
 
     <a class="post__back" href={url(`/${categorySlug}`)}>← Back to {category}</a>
   </article>
@@ -96,9 +100,7 @@ const categorySlug = categories.find((c) => c.label === category)?.slug ?? "";
   .post__body :global(p) {
     margin: 0 0 1.25em;
   }
-  .post__takeaway {
-    border: var(--border);
-    padding: var(--space-3) var(--space-4);
+    .post__takeaway {
     margin-top: var(--space-5);
   }
   .post__takeaway-label {
