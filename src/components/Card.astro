@@ -41,8 +41,10 @@ const minutes = readTime(post.body ?? "");
   .card:hover {
     box-shadow: 4px 4px 0 var(--black);
   }
-  .card__media {
+    .card__media {
     aspect-ratio: 3 / 2;
+    overflow: hidden;
+    flex-shrink: 0;
     border-bottom: var(--border);
   }
   .card__media :global(img) {
