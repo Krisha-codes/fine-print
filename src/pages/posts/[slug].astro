@@ -1,0 +1,128 @@
+---
+import { getCollection, render } from "astro:content";
+import { Image } from "astro:assets";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CategoryPill from "../../components/CategoryPill.astro";
+import { categories } from "../../utils/categories";
+import { readTime } from "../../utils/readTime";
+import { url } from "../../utils/url";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts", ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { title, category, coverImage, excerpt, author, publishDate, takeaway } = post.data;
+const { Content } = await render(post);
+
+const minutes = readTime(post.body ?? "");
+const date = publishDate.toLocaleDateString("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+});
+const categorySlug = categories.find((c) => c.label === category)?.slug ?? "";
+---
+
+<BaseLayout title={title}>
+  <article class="post">
+    <CategoryPill label={category} />
+    <h1 class="post__title">{title}</h1>
+    <p class="post__byline">By {author} · {date} · {minutes} min read</p>
+
+    <div class="post__cover">
+      <Image src={coverImage} alt="" width={1400} />
+    </div>
+
+    <p class="post__excerpt">{excerpt}</p>
+
+    <div class="post__body">
+      <Content />
+    </div>
+
+    <aside class="post__takeaway">
+      <span class="post__takeaway-label">My takeaway</span>
+      <p>{takeaway}</p>
+    </aside>
+
+    <a class="post__back" href={url(`/${categorySlug}`)}>← Back to {category}</a>
+  </article>
+</BaseLayout>
+
+<style>
+  .post {
+    width: 100%;
+    max-width: var(--column);
+    margin-inline: auto;
+    padding: var(--space-5) var(--space-4);
+  }
+  .post__title {
+    font-size: clamp(32px, 6vw, 44px);
+    margin-top: var(--space-3);
+  }
+  .post__byline {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    color: var(--gray);
+    margin: var(--space-3) 0;
+  }
+  .post__cover {
+    aspect-ratio: 7 / 4;
+    overflow: hidden;
+    margin-bottom: var(--space-4);
+  }
+  .post__cover :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .post__excerpt {
+    font-family: var(--font-hand);
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 0 0 var(--space-4);
+  }
+  .post__body {
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.75;
+  }
+  .post__body :global(p) {
+    margin: 0 0 1.25em;
+  }
+  .post__takeaway {
+    border: var(--border);
+    padding: var(--space-3) var(--space-4);
+    margin-top: var(--space-5);
+  }
+  .post__takeaway-label {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--red);
+  }
+  .post__takeaway p {
+    font-style: italic;
+    margin: var(--space-2) 0 0;
+  }
+  .post__back {
+    display: inline-block;
+    margin-top: var(--space-5);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray);
+    text-decoration: none;
+  }
+  .post__back:hover {
+    text-decoration: underline;
+  }
+</style>
