@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+export function getStaticPaths() {
+  return [
+    { params: { category: "news" }, props: { label: "News" } },
+    { params: { category: "receipts" }, props: { label: "Receipts" } },
+    { params: { category: "success-stories" }, props: { label: "Success Stories" } },
+  ];
+}
+
+const { label } = Astro.props;
+---
+
+<BaseLayout title={label}>
+  <div class="container page">
+    <h1>{label}</h1>
+    <p>Posts for this category go here in step 6.</p>
+  </div>
+</BaseLayout>

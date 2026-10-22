@@ -1,0 +1,41 @@
+---
+import { url } from "../utils/url";
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <nav class="footer__links" aria-label="Footer">
+      <a href={url("/about")}>About</a>
+      <a href="#">Contact</a>
+    </nav>
+    <a href="#">Instagram</a>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    margin-top: var(--space-6);
+    border-top: 2px solid var(--black);
+  }
+  .footer__inner {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    padding-block: var(--space-4);
+  }
+  .footer__links {
+    display: flex;
+    gap: var(--space-3);
+  }
+  .footer a {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--red);
+    text-decoration: none;
+  }
+  .footer a:hover {
+    text-decoration: underline;
+  }
+</style>
