@@ -1,10 +1,107 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import CategoryPill from "../components/CategoryPill.astro";
+import { url } from "../utils/url";
+import { links } from "../data/links";
+
+const sections = [
+  { label: "News", slug: "news", text: "Current events on women’s issues, without the noise." },
+  { label: "Receipts", slug: "receipts", text: "Popular claims, checked against the evidence." },
+  { label: "Success Stories", slug: "success-stories", text: "Real achievements worth celebrating." },
+];
 ---
 
 <BaseLayout title="About">
-  <div class="container page">
+  <article class="about">
     <h1>About</h1>
-    <p>Coming later.</p>
-  </div>
+
+        <h2>Why Fine Print</h2>
+    <p>
+      The fine print is where the important information hides. It’s easy to skip, and
+      easy to get burned by. Women’s issues often get treated the same way: buried,
+      overlooked, scrolled past. Fine Print is where I read the parts they skipped.
+    </p>
+    <p>
+      Every post is built on real research, and many end with a short personal takeaway
+      on what it made me think.
+    </p>
+    <h2>What you’ll find here</h2>
+    <ul class="sections">
+      {
+        sections.map((s) => (
+          <li>
+            <CategoryPill label={s.label} />
+            <p>{s.text}</p>
+            <a href={url(`/${s.slug}`)}>Read {s.label} →</a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <h2>Who’s behind it</h2>
+    <p>
+      I’m Krisha, a computer science student who loves math, research and building things.
+      I started Fine Print to dig into the evidence on women’s issues myself, and I’m
+      building the site from scratch, so this is also where I’m learning web development.
+    </p>
+
+    <h2>Follow along</h2>
+    <p class="follow">
+      <a href={links.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href={links.newsletter} target="_blank" rel="noopener noreferrer">Newsletter</a>
+    </p>
+  </article>
 </BaseLayout>
+
+<style>
+  .about {
+    width: 100%;
+    max-width: var(--column);
+    margin-inline: auto;
+    padding: var(--space-5) var(--space-4);
+  }
+  h1 {
+    font-size: clamp(36px, 8vw, 56px);
+    margin-bottom: var(--space-4);
+  }
+  h2 {
+    font-size: 28px;
+    margin: var(--space-5) 0 var(--space-3);
+  }
+  p {
+    font-size: 18px;
+    line-height: 1.75;
+    margin: 0 0 1.25em;
+  }
+  .sections {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .sections li {
+    border: var(--border);
+    padding: var(--space-3) var(--space-4);
+  }
+  .sections p {
+    margin: var(--space-2) 0;
+  }
+  .sections a,
+  .follow a {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--red);
+    text-decoration: none;
+  }
+  .sections a:hover,
+  .follow a:hover {
+    text-decoration: underline;
+  }
+  .follow {
+    display: flex;
+    gap: var(--space-4);
+  }
+</style>

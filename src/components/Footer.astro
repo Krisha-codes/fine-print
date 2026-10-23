@@ -1,14 +1,15 @@
 ---
 import { url } from "../utils/url";
+import { links } from "../data/links";
 ---
 
 <footer class="footer">
   <div class="container footer__inner">
     <nav class="footer__links" aria-label="Footer">
       <a href={url("/about")}>About</a>
-      <a href="#">Contact</a>
+      <a href={links.contactEmail}>Contact</a>
     </nav>
-    <a href="#">Instagram</a>
+    <a href={links.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
   </div>
 </footer>
 
