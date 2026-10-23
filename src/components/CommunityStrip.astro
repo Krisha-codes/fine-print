@@ -1,0 +1,38 @@
+<section class="strip">
+  <div class="container strip__inner">
+    <p class="strip__text">You’re not alone in this — join the community</p>
+    <a class="strip__btn" href="#">Join Us →</a>
+  </div>
+</section>
+
+<style>
+  .strip {
+    background: var(--black);
+    color: var(--cream);
+    margin-top: var(--space-6);
+  }
+  .strip__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    padding-block: var(--space-4);
+  }
+  .strip__text {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 3vw, 28px);
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .strip__btn {
+    background: var(--red);
+    color: white;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 999px;
+  }
+</style>

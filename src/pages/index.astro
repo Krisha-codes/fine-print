@@ -1,9 +1,39 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import CategoryTabs from "../components/CategoryTabs.astro";
+import Card from "../components/Card.astro";
+import CommunityStrip from "../components/CommunityStrip.astro";
+
+const posts = await getCollection("posts", ({ data }) => !data.draft);
+
+// Featured posts first, then newest first
+const latest = posts
+  .sort(
+    (a, b) =>
+      Number(b.data.featured) - Number(a.data.featured) ||
+      b.data.publishDate.getTime() - a.data.publishDate.getTime()
+  )
+  .slice(0, 6);
 ---
 
 <BaseLayout>
-  <div class="container page">
-    <h1>Homepage coming in step 8</h1>
+  <Hero />
+  <div class="container home">
+    <CategoryTabs />
+    <ul class="card-grid">
+      {latest.map((post) => <li><Card post={post} /></li>)}
+    </ul>
   </div>
+  <CommunityStrip />
 </BaseLayout>
+
+<style>
+  .home {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    padding-block: var(--space-5);
+  }
+</style>

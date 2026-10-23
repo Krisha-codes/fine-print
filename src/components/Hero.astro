@@ -1,0 +1,28 @@
+---
+import { Image } from "astro:assets";
+import heroImage from "../assets/hero.jpg";
+---
+
+<section class="hero">
+  <Image
+    src={heroImage}
+    alt="The fine print they didn’t want you to read: a collage of cut-out clippings, photos and torn paper"
+    width={2400}
+    loading="eager"
+  />
+</section>
+
+<style>
+  .hero {
+    height: clamp(240px, 32vw, 460px);
+    overflow: hidden;
+    border-bottom: var(--border);
+  }
+  .hero :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+</style>

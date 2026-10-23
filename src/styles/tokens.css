@@ -21,7 +21,7 @@
   --space-6: 64px;
 
   /* Layout */
-  --page-max: 1200px;
+  --page-max: 1360px;
   --column: 700px;
   --border: 2px solid var(--black);
 }

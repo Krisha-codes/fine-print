@@ -25,7 +25,7 @@ const posts = (
       posts.length === 0 ? (
         <p>Nothing here yet.</p>
       ) : (
-        <ul class="grid">
+        <ul class="card-grid">
           {posts.map((post) => (
             <li>
               <Card post={post} />
@@ -41,16 +41,5 @@ const posts = (
   h1 {
     font-size: 56px;
     margin-bottom: var(--space-4);
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .grid li {
-    display: flex;
   }
 </style>
