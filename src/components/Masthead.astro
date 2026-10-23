@@ -102,4 +102,19 @@ const links = [
     height: 32px;
     border: 1.5px solid var(--red);
   }
+    @media (max-width: 640px) {
+    .masthead__inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .nav,
+    .nav__links {
+      gap: var(--space-2) var(--space-3);
+    }
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  
 </style>
